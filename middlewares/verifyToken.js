@@ -17,7 +17,6 @@ exports.verifyUserToken = async (req, res, next) => {
           .json({ message: "User does not exist for this token" });
       }
       req.user = user;
-
       return next();
     } catch (e) {
       console.log(e.message);

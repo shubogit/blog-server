@@ -17,9 +17,8 @@ router // login-admin
   .post(_verifyUser, adminControllers.adminLogin);
 
 router // create-user
-  .route("/user")
-  .post(_verifyToken, adminControllers.createUser);
-
+  .route("/register")
+  .post(adminControllers.createUser);
 
 // GET - methods
 
@@ -28,12 +27,10 @@ router // get-all-users
   .route("/user")
   .get(_verifyToken, adminControllers.getAllUser);
 
-
 // SINGULAR
 router // get-user-by-ID
   .route("/user/:id")
   .get(_verifyToken, adminControllers.getUserById);
-
 
 // exports
 module.exports = router;
