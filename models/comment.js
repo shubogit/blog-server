@@ -5,8 +5,8 @@ const validateComment = comment => {
   const schema = Joi.object().keys({
     userId: Joi.string().required(),
     reply: Joi.array().items(Joi.string()),
+    type: Joi.string().required(),
     content: Joi.string().required(),
-    likes: Joi.array().items(Joi.string()),
     blogId: Joi.string(),
     commentId: Joi.string()
   });
@@ -19,11 +19,12 @@ const commentSchema = new mongoose.Schema({
     ref: "user",
     required: true
   },
+  type: { type: String, required: true },
   reply: [{ type: mongoose.Schema.ObjectId, ref: "comment" }],
   content: { type: String, required: true },
   created: { type: Date, default: Date.now, required: true },
-  likes: [{ type: mongoose.Schema.ObjectId, ref: "user", default: [] }],
-  blogId: { type: mongoose.Schema.ObjectId, ref: "blog" }
+  blogId: { type: mongoose.Schema.ObjectId, ref: "blog" },
+  commentId: { type: mongoose.Schema.ObjectId, ref: "comment" }
 });
 
 const Comment = mongoose.model("comment", commentSchema);
